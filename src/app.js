@@ -13,26 +13,27 @@ const DEFAULT_ORIGINS = [
   'http://127.0.0.1:8084',
   'http://10.44.155.11:8080'
 ];
+
 const ENV_ORIGINS = (process.env.CORS_ORIGIN || process.env.cors_ORIGIN || '')
   .split(',')
   .map((s) => s.trim())
   .filter(Boolean);
+
 const ALLOWED_ORIGINS = ENV_ORIGINS.length ? ENV_ORIGINS : DEFAULT_ORIGINS;
 
 app.use(cors({
   origin(origin, callback) {
-    console.log('CORS request from origin:', origin);
-    console.log('Allowed origins:', ALLOWED_ORIGINS);
     if (!origin || ALLOWED_ORIGINS.includes(origin)) {
-      return callback(null, true);
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
     }
-    console.log('Origin not allowed:', origin);
-    return callback(new Error('Not allowed by CORS'));
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
 }));
+
 
 
 import logger from "./logger.js";

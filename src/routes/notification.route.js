@@ -14,7 +14,7 @@ const router = Router();
 // All routes require authentication
 router.use(authenticate);
 
-// Get user notifications
+// Get user notificationssince
 router.get("/", authorizeRoles("admin", "teacher", "student"), getUserNotifications);
 
 // Get unread count
