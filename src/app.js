@@ -13,6 +13,7 @@ const app=express()
 
 app.use(cors ( {
   origin : 'https://digiclassroom-frontend.netlify.app',
+  credentials : true,
 } ))
 
 // app.use(cors({
