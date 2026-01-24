@@ -4,21 +4,28 @@ import { errorHandler } from './middlewares/error.middleware.js'
 
 const app=express()
 
-const ALLOWED_ORIGINS = [
-  'https://digiclassroom-frontend.netlify.app',
-  'http://localhost:8080',
-];
+// const ALLOWED_ORIGINS = [
+//   'https://digiclassroom-frontend.netlify.app',
+//   'http://localhost:8080',
+// ];
 
-app.use(cors({
-  origin(origin, callback) {
-    if (!origin || ALLOWED_ORIGINS.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-}));
+// process. || 5000
+
+app.use(cors ( {
+  origin : 'https://digiclassroom-frontend.netlify.app',
+  credentials : true,
+} ))
+
+// app.use(cors({
+//   origin(origin, callback) {
+//     if (!origin || ALLOWED_ORIGINS.includes(origin)) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+//   credentials: true,
+// }));
 
 
 
