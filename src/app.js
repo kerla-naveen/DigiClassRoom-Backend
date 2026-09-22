@@ -3,10 +3,9 @@ import cors from 'cors'
 import { errorHandler } from './middlewares/error.middleware.js'
 
 const app=express()
-const allowedOrigins = [
-  'https://digiclassroom-frontend.netlify.app',
-  'http://localhost:8080',
-];
+const allowedOrigins = process.env.CORS_ORIGINS
+  ? process.env.CORS_ORIGINS.split(',').map((origin) => origin.trim())
+  : [];
 
 app.use(
   cors({
