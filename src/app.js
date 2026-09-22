@@ -3,32 +3,23 @@ import cors from 'cors'
 import { errorHandler } from './middlewares/error.middleware.js'
 
 const app=express()
+const allowedOrigins = [
+  'https://digiclassroom-frontend.netlify.app',
+  'http://localhost:8080',
+];
 
-// const ALLOWED_ORIGINS = [
-//   'https://digiclassroom-frontend.netlify.app',
-//   'http://localhost:8080',
-// ];
-
-// process. || 5000
-
-app.use(cors({
-  origin: 'https://digiclassroom-frontend.netlify.app',
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
-  maxAge: 86400,
-}))
-
-// app.use(cors({
-//   origin(origin, callback) {
-//     if (!origin || ALLOWED_ORIGINS.includes(origin)) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error('Not allowed by CORS'));
-//     }
-//   },
-//   credentials: true,
-// }));
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true,
+  })
+);
 
 
 
